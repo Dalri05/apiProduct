@@ -30,12 +30,43 @@ public class productController {
     @GetMapping("/{id}")
     public ResponseEntity<productModel> produtoPeloId(@PathVariable int id) {
         Optional<productModel> product = repository.findById(id);
-        return ResponseEntity.ok(product.get());
+        if (product.isPresent()) {
+            return ResponseEntity.ok(product.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
     public ResponseEntity<productModel> addProduto(@RequestBody productModel product) {
         productModel savedProduct = service.saveProduct(product);
         return ResponseEntity.ok(savedProduct);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<productModel> deleteProduct(@PathVariable int id) {
+        Optional<productModel> product = repository.findById(id);
+        if (product.isPresent()) {
+            repository.deleteById(id);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(product.get());
+    }
+
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<productModel> updateProduct(@PathVariable int id, @RequestBody productModel product) {
+        Optional<productModel> produtoParaEditar = service.getProductById(id);
+
+        if (produtoParaEditar.isPresent()) {
+            productModel produtoExistente = produtoParaEditar.get();
+            if (product.getName() != null) produtoExistente.setName(product.getName());
+            if (product.getDescription() != null) produtoExistente.setDescription(product.getDescription());
+
+            service.saveProduct(produtoExistente);
+            return ResponseEntity.ok(produtoExistente);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
