@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@Table(name = "product")
+@Table(name = "vendas")
 public class VendasModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,15 +8,14 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "product")
+@Table(name = "cliente")
 public class ClienteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cliente_id")
-    private int cliente_id;
+    private int clienteid;
     @Column(length = 50, nullable = false)
     private String name;
     @Column(length = 50, nullable = false)

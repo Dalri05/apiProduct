@@ -28,7 +28,7 @@ public class productController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<productModel> produtoPeloId(@PathVariable int id) {
+    public ResponseEntity<productModel> BuscarProdutoPeloId(@PathVariable int id) {
         Optional<productModel> product = repository.findById(id);
         if (product.isPresent()) {
             return ResponseEntity.ok(product.get());
