@@ -1,7 +1,7 @@
 package com.API.first.service;
 
+import com.API.first.enums.ClienteEnum;
 import com.API.first.model.ClienteModel;
-import com.API.first.model.productModel;
 import com.API.first.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,4 +24,12 @@ public class ClienteService {
     public Optional<ClienteModel> getClienteById(int id) {
         return repository.findById(id);
     }
+
+    public static ClienteModel transformaSituacaoCliente(ClienteModel clienteNovaSituacao){
+        if (clienteNovaSituacao.getSituacao() == ClienteEnum.INATIVO) {
+            clienteNovaSituacao.setSituacao(ClienteEnum.ATIVO);
+        }
+        return clienteNovaSituacao;
+    }
 }
+

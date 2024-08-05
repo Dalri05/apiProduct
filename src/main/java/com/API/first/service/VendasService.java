@@ -15,7 +15,7 @@ public class VendasService {
         this.repository = repository;
     }
 
-    public VendasModel saveVenda(VendasModel cliente) {
-        return repository.save(cliente);
+    public VendasModel saveVenda(VendasModel venda) {
+        return repository.save(venda);
     }
 }
