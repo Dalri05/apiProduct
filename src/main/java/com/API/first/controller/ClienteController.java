@@ -18,12 +18,12 @@ public class ClienteController {
         this.repository = repository;
     }
 
-    @GetMapping("/getClientes")
+    @GetMapping("/getclientes")
     public ResponseEntity PegarTodosClientes(){
         return ResponseEntity.ok(repository.findAll());
     }
 
-    @PostMapping
+    @PostMapping("/novoCliente")
     public ResponseEntity novoCliente(@RequestBody ClienteModel cliente){
         ClienteModel saveCliente = service.saveCliente(cliente);
         return ResponseEntity.ok(saveCliente);
