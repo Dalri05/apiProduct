@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -24,4 +26,13 @@ public class ClienteModel {
     @Column(length = 50, nullable = false)
     @Enumerated(EnumType.STRING)
     private ClienteEnum TIPO = ClienteEnum.TIPO_CLIENTE;
+    @Column(length = 50, nullable = false)
+    private String cpf;
+    @Column(length = 50, nullable = false)
+    private String email;
+    @Column(length = 50, nullable = false)
+    private Date dataNascimento;
+    @Column(name = "ultimaCompra", length = 50)
+    private Date ultimaCompra;
+
 }
