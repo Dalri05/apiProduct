@@ -24,4 +24,6 @@ public class VendasModel {
     private long valor;
     @Column(length = 50, nullable = false)
     private Date dataDeCompra = new Date();
+    @Column(length = 50, nullable = false)
+    private String produtos;
 }
