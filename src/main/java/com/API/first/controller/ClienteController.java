@@ -1,5 +1,6 @@
 package com.API.first.controller;
 
+import com.API.first.enums.ClienteEnum;
 import com.API.first.model.ClienteModel;
 import com.API.first.repository.ClienteRepository;
 import com.API.first.service.ClienteService;
@@ -19,8 +20,13 @@ public class ClienteController {
     }
 
     @GetMapping("/getclientes")
-    public ResponseEntity PegarTodosClientes(){
+    public ResponseEntity pegarTodosClientes(){
         return ResponseEntity.ok(repository.findAll());
+    }
+
+    @GetMapping("/clientesInativos")
+    public ResponseEntity buscarClientesInativos(){
+        return ResponseEntity.ok(repository.buscarClientesInativo(ClienteEnum.INATIVO));
     }
 
     @PostMapping("/novoCliente")
