@@ -1,14 +1,13 @@
 package com.API.first.controller;
 
+import com.API.first.model.VendasModel;
 import com.API.first.repository.VendasRepository;
 import com.API.first.service.VendasService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Getter
@@ -27,5 +26,11 @@ public class VendasController {
     @GetMapping
     public ResponseEntity verVendas(){
         return ResponseEntity.ok(repository.findAll());
+    }
+
+    @PostMapping("/novaVenda")
+    public ResponseEntity registrarVenda(@RequestBody VendasModel venda){
+        venda = service.saveVenda(venda);
+        return ResponseEntity.ok(venda);
     }
 }
