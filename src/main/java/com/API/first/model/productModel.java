@@ -1,8 +1,11 @@
 package com.API.first.model;
 
+import com.API.first.enums.ProdutoEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Entity
 @Getter
@@ -17,4 +20,13 @@ public class productModel {
     private String name;
     @Column(length = 50, nullable = false)
     private String description;
+    @Column(length = 50, nullable = false)
+    private Long preco;
+    @Column(name = "quantidadeDisponivel", length = 50, nullable = false)
+    private String quantidadeDisponivel;
+    @Column(length = 50, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProdutoEnum DISPONIBILIDADE;
+    @Column(length = 50, nullable = false)
+    private Date dataInsercao;
 }
