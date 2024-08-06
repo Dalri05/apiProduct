@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 @Getter
 @Setter
@@ -39,8 +41,9 @@ public class VendasController {
         try {
             if (cliente.getSituacao() == ClienteEnum.INATIVO){
                 cliente.setSituacao(ClienteEnum.ATIVO);
-                clienteService.saveCliente(cliente);
             }
+            cliente.setUltimaCompra(new Date());
+            clienteService.saveCliente(cliente);
             service.saveVenda(venda);
             return ResponseEntity.ok("Venda registrada com sucesso");
         } catch (Exception e) {
