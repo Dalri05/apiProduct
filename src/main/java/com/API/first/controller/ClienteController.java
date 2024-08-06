@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
@@ -27,6 +29,27 @@ public class ClienteController {
     @GetMapping("/clientesInativos")
     public ResponseEntity buscarClientesInativos(){
         return ResponseEntity.ok(repository.buscarClientesInativo(ClienteEnum.INATIVO));
+    }
+
+    @PutMapping("/transformarCliente/{id}")
+    public ResponseEntity transformarCliente(@PathVariable int id, @RequestBody ClienteEnum tipoCliente) throws Exception {
+        try {
+            String mensagemFinal;
+            Optional<ClienteModel> clienteNovaSituacao = service.getClienteById(id);
+            if (clienteNovaSituacao.isPresent()) {
+                mensagemFinal = "Cliente Atualizado com sucesso";
+                ClienteModel cliente = clienteNovaSituacao.get();
+                cliente.setSituacao(tipoCliente);
+                repository.save(cliente);
+                return ResponseEntity.ok(mensagemFinal);
+            }
+            mensagemFinal = "Erro ao atualizar situacao do cliente";
+            return ResponseEntity.ok(mensagemFinal);
+
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new Exception();
+        }
     }
 
     @PostMapping("/novoCliente")
