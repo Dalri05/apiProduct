@@ -29,4 +29,6 @@ public class productModel {
     private ProdutoEnum DISPONIBILIDADE;
     @Column(length = 50, nullable = false)
     private Date dataInsercao;
+    @Column(name = "product_id")
+    private int produtoId;
 }
