@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,4 +32,6 @@ public class productModel {
     private Date dataInsercao;
     @Column(name = "product_id")
     private int produtoId;
+    @OneToMany(mappedBy = "codigoColecao")
+    private List<ColecaoModel> colecoes;
 }
